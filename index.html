@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risoles Delight - Jualan Risoles Enak</title>
+    <style>
+        :root {
+            --primary: #FFA726;
+            --primary-dark: #FB8C00;
+            --secondary: #4CAF50;
+            --light: #FFF8E1;
+            --dark: #212121;
+            --gray: #757575;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            margin-top: 80px;
+            height: 80vh;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 0 40px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--gray);
+            max-width: 600px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero-image {
+            flex: 1;
+            height: 100%;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .products {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .order-now {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .order-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .order-option {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .order-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .order-option-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .order-option h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .order-option p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .order-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .order-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .about {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+
+        .contact {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-card h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-button i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 15px;
+            }
+
+            nav ul li {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .hero {
+                flex-direction: column;
+                height: auto;
+                padding: 40px 0;
+            }
+
+            .hero-content {
+                padding: 0 20px;
+                text-align: center;
+            }
+
+            .hero-image {
+                margin-top: 30px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .order-option {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Risoles Mama Alby</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#order">Pesan</a></li>
+                    <li><a href="#about">Tentang Kami</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Risoles Homemade Lezat dengan Rasa Istimewa</h1>
+            <p>Cemilan renyah dengan isian daging yang juicy dan bumbu rempah khas. Diproses dengan bahan pilihan dan selalu fresh setiap hari.</p>
+            <a href="#order" class="cta-button">Pesan Sekarang</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb002517-f0f7-4502-80ee-70be4c810f5d.png" alt="Tampilan close-up risoles goreng keemasan dengan tampilan renyah disusun rapi di piring kayu dengan hiasan daun selada di sampingnya"/>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Produk Kami</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/95b2da8e-1599-40d3-8181-e379d98fce6f.png" alt="Risoles daging sapi goreng keemasan dengan tekstur renyah dan isian yang terlihat juicy"/>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Risoles Beef Mayo</h3>
+                        <p class="product-price">Rp 3.000/biji</p>
+                        <p class="product-description">Risoles premium dengan isian daging sapi pilihan, sayuran segar, dan bumbu rempah khas.</p>
+                        <a href="#order" class="order-button">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3ef2237c-5113-4fbc-bd36-4d1ececea6f6.png" alt="Risoles ayam potongan di piring putih dengan taburan daun bawang dan saus sambal di sampingnya"/>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Risoles Sosis Mayo</h3>
+                        <p class="product-price">Rp 3.000/biji</p>
+                        <p class="product-description">Sosis ayam dengan campuran bumbu masak yang gurih.</p>
+                        <a href="#order" class="order-button">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://awsimages.detik.net.id/community/media/visual/2023/10/05/resep-risoles-suun-dan-sayuran_43.jpeg?w=1200" alt="Risoles keju yang ketika dipotong terlihat lelehan keju mozzarella bersama dengan daun parsley sebagai garnish"/>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Risoles Sayur</h3>
+                        <p class="product-price">Rp 3.000/biji</p>
+                        <p class="product-description">Risoles premium dengan isian sayur segar.</p>
+                        <a href="#order" class="order-button">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://i.ytimg.com/vi/UwxgdehCi74/maxresdefault.jpg" alt="Paket combo berisi berbagai varian risoles yang tersusun rapi dalam box makanan kertas cokelat"/>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Risoles Frozen</h3>
+                        <p class="product-price">Rp 15.000</p>
+                        <p class="product-description">Paket berisi 5 risoles dengan kombinasi varian daging sapi, ayam, dan sayur.</p>
+                        <a href="#order" class="order-button">Pesan</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25fa8e37-ec1e-4d8a-8a75-2caf35a01284.png" alt="Paket combo berisi berbagai varian risoles yang tersusun rapi dalam box makanan kertas cokelat"/>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Paket Kombo</h3>
+                        <p class="product-price">Rp 45.000</p>
+                        <p class="product-description">Paket berisi 15 risoles dengan kombinasi varian daging sapi, ayam, dan sayur.</p>
+                        <a href="#order" class="order-button">Pesan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="order-now" id="order">
+        <div class="container">
+            <h2 class="section-title">Cara Memesan</h2>
+            <div class="order-options">
+                <div class="order-option">
+                    <div class="order-option-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Pesan langsung melalui WhatsApp dengan cepat dan mudah.</p>
+                    <a href="https://wa.me/6281291414495?text=Halo, Saya%20ingin%20memesan risoles" class="order-button">Hubungi Kami</a>
+                </div>
+                <div class="order-option">
+                    <div class="order-option-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Shopee</h3>
+                    <p>Beli melalui marketplace Shopee dengan berbagai promo menarik.</p>
+                    <a href="#" class="order-button">Beli di Shopee</a>
+                </div>
+                <div class="order-option">
+                    <div class="order-option-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Tokopedia</h3>
+                    <p>Tersedia juga di Tokopedia dengan pengiriman ke seluruh Indonesia.</p>
+                    <a href="#" class="order-button">Beli di Tokopedia</a>
+                </div>
+                <div class="order-option">
+                    <div class="order-option-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <h3>TikTok</h3>
+                    <p>Manfaatkan promo seru di TikTok untuk pembelian pertama Anda.</p>
+                    <a href="https://www.tiktok.com/@dapurmamaalby" class="order-button">Beli di TikTok</a>
+                </div>
+                <div class="order-option">
+                    <div class="order-option-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <p>Manfaatkan promo seru di Instagram untuk pembelian pertama Anda.</p>
+                    <a href="https://instagram.com/dapurmamaalbyy" class="order-button">Beli di Instagram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Tentang Kami</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/87a70db6-2d05-463e-a24c-8160c820313a.png" alt="Keluarga sedang membuat risoles bersama di dapur rumah yang bersih dengan bahan-bahan segar terlihat di meja"/>
+                </div>
+                <div class="about-text">
+                    <p>Risoles Mama Alby dimulai dari kecintaan keluarga kami terhadap makanan tradisional Indonesia yang lezat. Sejak 2024, kami berkomitmen untuk menghadirkan risoles dengan cita rasa otentik namun dengan kualitas bahan premium.</p>
+                    <p>Setiap risoles kami buat dengan bahan pilihan terbaik dan diproses dengan higienis. Kami tidak menggunakan bahan pengawet atau penyedap buatan, sehingga rasa yang Anda dapatkan adalah rasa alami yang nikmat.</p>
+                    <p>Dari dapur rumah ke dapur Anda, kami ingin berbagi kebahagiaan melalui setiap gigitan risoles buatan kami.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>Lokasi</h3>
+                    <p><i class="fas fa-map-marker-alt"></i>Sudimara Timur, Ciledug Kota Tangerang</p>
+                    <p><i class="fas fa-clock"></i>Buka setiap hari 08.00 - 20.00 WIB</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Kontak</h3>
+                    <!-- <p><i class="fas fa-phone"></i> (021) 1234567</p> -->
+                    <p><i class="fab fa-whatsapp"></i> 0812-9141-4495</p>
+                    <!--<p><i class="fas fa-envelope"></i> info@risolesdelight.com</p> -->
+                </div>
+                <div class="contact-card">
+                    <h3>Sosial Media</h3>
+                    <p><i class="fab fa-instagram"></i> @dapurmamaalbyy</p>
+                    <p><i class="fab fa-facebook"></i> Dapur Mama Alby</p>
+                    <p><i class="fab fa-tiktok"></i> @dapurmamaalby</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>© 2025 Risoles Mama Alby. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+           <!-- <p>Made with ❤ for delicious risoles lovers</p> -->
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281291414495?text=Halo, Saya%20ingin%20memesan risoles" class="whatsapp-button">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Background color change on scroll for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'var(--primary-dark)';
+            } else {
+                header.style.backgroundColor = 'var(--primary)';
+            }
+        });
+    </script>
+</body>
+</html>
